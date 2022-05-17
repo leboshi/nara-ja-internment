@@ -1,8 +1,11 @@
 # frozen_string_literal: true
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+
+SOURCE_URL       = 'https://catalog.archives.gov/catalogmedia/lz/electronic-records/rg-210/wra/RG210.JAPAN.WRA26.txt?download=true'
+SOURCE_FILE_PATH = Rails.root.join('db/RG210.JAPAN.WRA26.txt')
+
+Down.download(SOURCE_URL, destination: SOURCE_FILE_PATH) unless File.exist?(SOURCE_FILE_PATH)
+
+File.foreach(SOURCE_FILE_PATH) do |line|
+  parser = PersonParser.new(line)
+  parser.to_person.save! if parser.valid?
+end
