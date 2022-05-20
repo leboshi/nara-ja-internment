@@ -39,15 +39,13 @@ class CodedFileParser
     }.freeze
   private_constant :LINE_SCHEMA
 
-  def initialize(plain_text_row)
-    @raw_values = LINE_SCHEMA.transform_values { |i| plain_text_row[i].presence&.strip }
-  end
+  attr_reader :attributes
 
-  def to_coded_file
-    CodedFile.new(@raw_values)
+  def initialize(plain_text_row)
+    @attributes = LINE_SCHEMA.transform_values { |i| plain_text_row[i].presence&.strip }
   end
 
   def valid?
-    @raw_values[:file_number].to_s.match?(/\A\d+\z/)
+    @attributes[:file_number].to_s.match?(/\A\d+\z/)
   end
 end

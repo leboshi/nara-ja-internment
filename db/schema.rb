@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_20_023035) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_20_030114) do
+  create_table "assembly_centers", id: :string, force: :cascade do |t|
+    t.string "name"
+    t.index ["name"], name: "index_assembly_centers_on_name"
+  end
+
   create_table "coded_files", force: :cascade do |t|
     t.string "last_name"
     t.string "first_name"
@@ -82,4 +87,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_023035) do
     t.index ["soc_sec_and_lang_school_id"], name: "index_coded_files_on_soc_sec_and_lang_school_id"
   end
 
+  create_table "relocation_centers", id: :string, force: :cascade do |t|
+    t.string "name", null: false
+    t.index ["name"], name: "index_relocation_centers_on_name"
+  end
+
+  add_foreign_key "coded_files", "assembly_centers"
+  add_foreign_key "coded_files", "relocation_centers"
 end
