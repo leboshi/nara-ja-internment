@@ -92,6 +92,4 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_030114) do
     t.index ["name"], name: "index_relocation_centers_on_name"
   end
 
-  add_foreign_key "coded_files", "assembly_centers"
-  add_foreign_key "coded_files", "relocation_centers"
 end

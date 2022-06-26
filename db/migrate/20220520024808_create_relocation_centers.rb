@@ -2,11 +2,8 @@
 
 class CreateRelocationCenters < ActiveRecord::Migration[7.0]
   def change
-    create_table :relocation_centers, id: false do |t|
-      t.string :id, primary_key: true
+    create_table :relocation_centers, id: :string do |t|
       t.string :name, null: false, index: true
     end
-
-    add_foreign_key :coded_files, :relocation_centers
   end
 end
