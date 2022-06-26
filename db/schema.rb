@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_20_030114) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_26_041421) do
   create_table "assembly_centers", id: :string, force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.index ["name"], name: "index_assembly_centers_on_name"
   end
 
@@ -85,6 +85,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_030114) do
     t.index ["relocation_center_id"], name: "index_coded_files_on_relocation_center_id"
     t.index ["school_grade_id"], name: "index_coded_files_on_school_grade_id"
     t.index ["soc_sec_and_lang_school_id"], name: "index_coded_files_on_soc_sec_and_lang_school_id"
+  end
+
+  create_table "parent_birth_countries", id: :string, force: :cascade do |t|
+    t.integer "mother", null: false
+    t.integer "father", null: false
+    t.index ["father"], name: "index_parent_birth_countries_on_father"
+    t.index ["mother"], name: "index_parent_birth_countries_on_mother"
   end
 
   create_table "relocation_centers", id: :string, force: :cascade do |t|

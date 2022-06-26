@@ -13,8 +13,7 @@ relocation_centers = [
   { id: 7, name: 'Heart Mountain' },
   { id: 8, name: 'Granada' },
   { id: 9, name: 'Rowher' },
-  { id: 0, name: 'Jerome' },
-  { id: 'R', name: '[UNDEFINED CODE]' }
+  { id: 0, name: 'Jerome' }
 ]
 RelocationCenter.insert_all(relocation_centers, unique_by: :id)
 
@@ -35,10 +34,38 @@ assembly_centers = [
   { id: 'C', name: 'Stockton' },
   { id: 'D', name: 'Tanforan' },
   { id: 'E', name: 'Tulare' },
-  { id: 'F', name: 'Turlock' },
-  { id: 'Z', name: '[UNDEFINED CODE]' }
+  { id: 'F', name: 'Turlock' }
 ]
 AssemblyCenter.insert_all(assembly_centers, unique_by: :id)
+
+parent_birth_countries = [
+  { id: 'W', mother: :unknown, father: :unknown },
+  { id: 'B', mother: :unknown, father: :japan },
+  { id: 'K', mother: :unknown, father: :us },
+  { id: 'T', mother: :unknown, father: :hawaii },
+  { id: 'Y', mother: :unknown, father: :other },
+  { id: 'A', mother: :japan, father: :unknown },
+  { id: '1', mother: :japan, father: :japan },
+  { id: '2', mother: :japan, father: :us },
+  { id: '3', mother: :japan, father: :hawaii },
+  { id: 'D', mother: :japan, father: :other },
+  { id: 'J', mother: :us, father: :unknown },
+  { id: '4', mother: :us, father: :japan },
+  { id: '5', mother: :us, father: :us },
+  { id: '6', mother: :us, father: :hawaii },
+  { id: 'M', mother: :us, father: :other },
+  { id: 'S', mother: :hawaii, father: :unknown },
+  { id: '7', mother: :hawaii, father: :japan },
+  { id: '8', mother: :hawaii, father: :us },
+  { id: '9', mother: :hawaii, father: :hawaii },
+  { id: 'V', mother: :hawaii, father: :other },
+  { id: 'X', mother: :other, father: :unknown },
+  { id: 'C', mother: :other, father: :japan },
+  { id: 'L', mother: :other, father: :us },
+  { id: 'U', mother: :other, father: :hawaii },
+  { id: 'Z', mother: :other, father: :other }
+]
+ParentBirthCountry.insert_all(parent_birth_countries, unique_by: :id)
 
 Down.download(SOURCE_URL, destination: SOURCE_FILE_PATH) unless File.exist?(SOURCE_FILE_PATH)
 
