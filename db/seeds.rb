@@ -67,6 +67,21 @@ parent_birth_countries = [
 ]
 ParentBirthCountry.insert_all(parent_birth_countries, unique_by: :id)
 
+father_occupations = [
+  { id: '&', description: 'Blank, unknown, none, dash' },
+  { id: '-', description: 'Unrevised forms (not on schedule)' },
+  { id: '1', description: 'Professional & semiprofessional' },
+  { id: '2', description: 'Managerial and official (except farm)' },
+  { id: '3', description: 'Clerical and sales' },
+  { id: '4', description: 'Service' },
+  { id: '5', description: 'Farm operators and managers' },
+  { id: '6', description: 'Farm laborers including foremen' },
+  { id: '7', description: 'Fishermen' },
+  { id: '8', description: 'Skilled craftsmen and foremen/Semi-skilled operators (except farm)' },
+  { id: '9', description: 'Unskilled laborers (except farm)' },
+]
+FatherOccupation.insert_all(father_occupations, unique_by: :id)
+
 Down.download(SOURCE_URL, destination: SOURCE_FILE_PATH) unless File.exist?(SOURCE_FILE_PATH)
 
 File.foreach(SOURCE_FILE_PATH).each_slice(1000) do |batch|
