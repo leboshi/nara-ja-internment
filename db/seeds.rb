@@ -78,9 +78,29 @@ father_occupations = [
   { id: '6', description: 'Farm laborers including foremen' },
   { id: '7', description: 'Fishermen' },
   { id: '8', description: 'Skilled craftsmen and foremen/Semi-skilled operators (except farm)' },
-  { id: '9', description: 'Unskilled laborers (except farm)' },
+  { id: '9', description: 'Unskilled laborers (except farm)' }
 ]
 FatherOccupation.insert_all(father_occupations, unique_by: :id)
+
+education_ja_total_years =
+  36.times.map do |i|
+    { id: i.to_s(36).upcase, years: i }
+  end
+education_ja_total_years << { id: '&', years: nil }
+EducationJaTotalYears.insert_all(education_ja_total_years, unique_by: :id)
+
+education_ja_grades = [
+  { id: '&', elementary_school: nil, high_school: nil, higher_ed: nil },
+  { id: '0', elementary_school: false, high_school: false, higher_ed: false },
+  { id: '1', elementary_school: true, high_school: false, higher_ed: false },
+  { id: '2', elementary_school: false, high_school: true, higher_ed: false },
+  { id: '3', elementary_school: false, high_school: false, higher_ed: true },
+  { id: '4', elementary_school: true, high_school: true, higher_ed: false },
+  { id: '5', elementary_school: true, high_school: false, higher_ed: true },
+  { id: '6', elementary_school: false, high_school: true, higher_ed: true },
+  { id: '7', elementary_school: true, high_school: true, higher_ed: true }
+]
+EducationJaGrades.insert_all(education_ja_grades, unique_by: :id)
 
 Down.download(SOURCE_URL, destination: SOURCE_FILE_PATH) unless File.exist?(SOURCE_FILE_PATH)
 

@@ -18,7 +18,8 @@ class CreateCodedFiles < ActiveRecord::Migration[7.0]
       t.string :father_occ_us_id, index: true
       t.string :father_occ_ja_id, index: true
 
-      t.string :education_ja_id, index: true
+      t.string :education_ja_total_years_id, index: true
+      t.string :education_ja_grades_id, index: true
       t.string :degrees_id, index: true
 
       t.string :ja_res_year_of_entry, index: true

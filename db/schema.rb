@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_26_041421) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_26_050009) do
   create_table "assembly_centers", id: :string, force: :cascade do |t|
     t.string "name", null: false
     t.index ["name"], name: "index_assembly_centers_on_name"
@@ -28,7 +28,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_26_041421) do
     t.string "parent_birth_country_id"
     t.string "father_occ_us_id"
     t.string "father_occ_ja_id"
-    t.string "education_ja_id"
+    t.string "education_ja_total_years_id"
+    t.string "education_ja_grades_id"
     t.string "degrees_id"
     t.string "ja_res_year_of_entry"
     t.string "ja_res_total_time_id"
@@ -56,7 +57,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_26_041421) do
     t.index ["birth_place_id"], name: "index_coded_files_on_birth_place_id"
     t.index ["birth_year"], name: "index_coded_files_on_birth_year"
     t.index ["degrees_id"], name: "index_coded_files_on_degrees_id"
-    t.index ["education_ja_id"], name: "index_coded_files_on_education_ja_id"
+    t.index ["education_ja_grades_id"], name: "index_coded_files_on_education_ja_grades_id"
+    t.index ["education_ja_total_years_id"], name: "index_coded_files_on_education_ja_total_years_id"
     t.index ["father_occ_ja_id"], name: "index_coded_files_on_father_occ_ja_id"
     t.index ["father_occ_us_id"], name: "index_coded_files_on_father_occ_us_id"
     t.index ["file_number"], name: "index_coded_files_on_file_number"
@@ -85,6 +87,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_26_041421) do
     t.index ["relocation_center_id"], name: "index_coded_files_on_relocation_center_id"
     t.index ["school_grade_id"], name: "index_coded_files_on_school_grade_id"
     t.index ["soc_sec_and_lang_school_id"], name: "index_coded_files_on_soc_sec_and_lang_school_id"
+  end
+
+  create_table "education_ja_grades", id: :string, force: :cascade do |t|
+    t.boolean "elementary_school"
+    t.boolean "high_school"
+    t.boolean "higher_ed"
+    t.index ["elementary_school"], name: "index_education_ja_grades_on_elementary_school"
+    t.index ["high_school"], name: "index_education_ja_grades_on_high_school"
+    t.index ["higher_ed"], name: "index_education_ja_grades_on_higher_ed"
+  end
+
+  create_table "education_ja_total_years", id: :string, force: :cascade do |t|
+    t.integer "years"
+    t.index ["years"], name: "index_education_ja_total_years_on_years"
+  end
+
+  create_table "father_occupations", id: :string, force: :cascade do |t|
+    t.string "description"
   end
 
   create_table "parent_birth_countries", id: :string, force: :cascade do |t|

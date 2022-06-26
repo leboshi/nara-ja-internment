@@ -6,4 +6,6 @@ class CodedFile < ApplicationRecord
   belongs_to :parent_birth_country, optional: true
   belongs_to :father_occ_in_us, class_name: 'FatherOccupation', optional: true
   belongs_to :father_occ_in_ja, class_name: 'FatherOccupation', optional: true
+  belongs_to :education_ja_total_years, optional: true
+  belongs_to :education_ja_grades, optional: true
 end
